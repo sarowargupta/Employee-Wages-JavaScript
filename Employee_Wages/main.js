@@ -1,14 +1,16 @@
-//UC-12 Employee payroll data
+//UC-13 Employee payroll data
 const EmployeePayroll = require("./EmployeePayroll");
 
+console.log("Creating Employee Payroll Data...");
+
+// Valid Employee
 const emp1 = new EmployeePayroll(1, "Alice", 5000, "Female", "2023-06-15");
-const emp2 = new EmployeePayroll(2, "Bob", 7000, "Male", "2022-09-10");
-const emp3 = new EmployeePayroll(3, "Charlie", 6000, "Male", "2021-12-01");
+console.log(emp1.getDetails());
 
-const employees = [emp1, emp2, emp3];
+// Invalid Employee Name (Should throw an error)
+const emp2 = new EmployeePayroll(2, "bob", 7000, "Male", "2022-09-10"); // Starts with lowercase
+const emp3 = new EmployeePayroll(3, "Jo", 6000, "Male", "2021-12-01");  // Less than 3 characters
 
-console.log("Employee Payroll Data:");
-employees.forEach(emp => console.log(emp.getDetails()));
 
 
 
