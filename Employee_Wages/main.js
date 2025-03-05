@@ -1,62 +1,16 @@
-//UC-11
-const WAGE_PER_HOUR = 20;
-const FULL_TIME_HOURS = 8;
-const PART_TIME_HOURS = 4;
-const MAX_WORKING_DAYS = 20;
-const MAX_WORKING_HOURS = 160;
+//UC-11 Employee Payroll Data
 
-const getWorkHours = (workType) => {
-    switch (workType) {
-        case 1: return PART_TIME_HOURS;
-        case 2: return FULL_TIME_HOURS;
-        default: return 0;
-    }
-};
+const EmployeePayroll = require("./EmployeePayroll");
 
-let totalWorkHours = 0;
-let totalDaysWorked = 0;
-let workLog = [];
+const emp1 = new EmployeePayroll(1, "Alice", 5000);
+const emp2 = new EmployeePayroll(2, "Bob", 7000);
+const emp3 = new EmployeePayroll(3, "Charlie", 6000);
 
-while (totalDaysWorked < MAX_WORKING_DAYS && totalWorkHours < MAX_WORKING_HOURS) {
-    let workType = Math.floor(Math.random() * 3);
-    let workHours = getWorkHours(workType);
+const employees = [emp1, emp2, emp3];
 
-    if (totalWorkHours + workHours > MAX_WORKING_HOURS) {
-        workHours = MAX_WORKING_HOURS - totalWorkHours; 
-    }
+console.log("Employee Payroll Data:");
+employees.forEach(emp => console.log(emp.getDetails()));
 
-    let dailyWage = workHours * WAGE_PER_HOUR;
-    totalWorkHours += workHours;
-    totalDaysWorked++;
-
-    workLog.push({
-        day: totalDaysWorked,
-        hoursWorked: workHours,
-        wageEarned: dailyWage
-    });
-}
-
-const totalWage = workLog.reduce((sum, entry) => sum + entry.wageEarned, 0);
-const totalHoursWorked = workLog.reduce((sum, entry) => sum + entry.hoursWorked, 0);
-console.log(`Total Hours Worked: ${totalHoursWorked}`);
-console.log(`Total Monthly Wage: $${totalWage}`);
-
-console.log("Full Working Days:");
-workLog.forEach(entry => {
-    if (entry.hoursWorked === FULL_TIME_HOURS) {
-        console.log(`Day ${entry.day} -> Hours: ${entry.hoursWorked}, Wage: $${entry.wageEarned}`);
-    }
-});
-
-const partWorkingDays = workLog
-    .filter(entry => entry.hoursWorked === PART_TIME_HOURS)
-    .map(entry => `Day ${entry.day}`);
-console.log("Part Working Days:", partWorkingDays);
-
-const noWorkingDays = workLog
-    .filter(entry => entry.hoursWorked === 0)
-    .map(entry => `Day ${entry.day}`);
-console.log("No Working Days:", noWorkingDays);
 
 
 
