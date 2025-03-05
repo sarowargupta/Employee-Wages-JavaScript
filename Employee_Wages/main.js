@@ -1,7 +1,8 @@
-//UC-03
+//UC-04
 const WAGE_PER_HOUR = 20;
 const FULL_TIME_HOURS = 8;
 const PART_TIME_HOURS = 4;
+const WORKING_DAYS_PER_MONTH = 20;
 
 function getWorkHours(workType) {
     switch (workType) {
@@ -17,9 +18,13 @@ function getWorkHours(workType) {
     }
 }
 
-let workType = Math.floor(Math.random() * 3);
-let workHours = getWorkHours(workType);
+let totalWorkHours = 0;
+for (let day = 1; day <= WORKING_DAYS_PER_MONTH; day++) {
+    let workType = Math.floor(Math.random() * 3); 
+    let workHours = getWorkHours(workType);
+    totalWorkHours += workHours;
+}
 
-let dailyWage = workHours * WAGE_PER_HOUR;
-console.log("Daily Wage: $" + dailyWage);
+let monthlyWage = totalWorkHours * WAGE_PER_HOUR;
+console.log("Total Monthly Wage: $" + monthlyWage);
 
