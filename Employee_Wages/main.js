@@ -1,27 +1,25 @@
-//UC-02
-const WAGE_PER_HOUR = 20; 
+//UC-03
+const WAGE_PER_HOUR = 20;
 const FULL_TIME_HOURS = 8;
 const PART_TIME_HOURS = 4;
-const NO_WORK_HOURS = 0;
 
-let empCheck = Math.floor(Math.random() * 3); 
-let empHours = 0;
-
-
-switch (empCheck) {
-    case 1:
-        empHours = PART_TIME_HOURS;
-        console.log("Employee worked Part Time");
-        break;
-    case 2:
-        empHours = FULL_TIME_HOURS;
-        console.log("Employee worked Full Time");
-        break;
-    default:
-        empHours = NO_WORK_HOURS;
-        console.log("Employee did not work");
-        break;
+function getWorkHours(workType) {
+    switch (workType) {
+        case 1:
+            console.log("Employee worked Part Time");
+            return PART_TIME_HOURS;
+        case 2:
+            console.log("Employee worked Full Time");
+            return FULL_TIME_HOURS;
+        default:
+            console.log("Employee did not work");
+            return 0;
+    }
 }
 
-let empWage = empHours * WAGE_PER_HOUR;
-console.log("Employee Wage: $" + empWage);
+let workType = Math.floor(Math.random() * 3);
+let workHours = getWorkHours(workType);
+
+let dailyWage = workHours * WAGE_PER_HOUR;
+console.log("Daily Wage: $" + dailyWage);
+
