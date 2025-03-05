@@ -1,4 +1,4 @@
-//UC-09
+//UC-10
 const WAGE_PER_HOUR = 20;
 const FULL_TIME_HOURS = 8;
 const PART_TIME_HOURS = 4;
@@ -15,8 +15,7 @@ const getWorkHours = (workType) => {
 
 let totalWorkHours = 0;
 let totalDaysWorked = 0;
-let dailyWageMap = new Map(); 
-let dailyHourMap = new Map(); 
+let workLog = []; 
 
 while (totalDaysWorked < MAX_WORKING_DAYS && totalWorkHours < MAX_WORKING_HOURS) {
     let workType = Math.floor(Math.random() * 3); 
@@ -30,32 +29,14 @@ while (totalDaysWorked < MAX_WORKING_DAYS && totalWorkHours < MAX_WORKING_HOURS)
     totalWorkHours += workHours;
     totalDaysWorked++;
 
-    dailyWageMap.set(totalDaysWorked, dailyWage);
-    dailyHourMap.set(totalDaysWorked, workHours);
+    workLog.push({
+        day: totalDaysWorked,
+        hoursWorked: workHours,
+        wageEarned: dailyWage
+    });
 }
 
-const totalWage = Array.from(dailyWageMap.values()).reduce((sum, wage) => sum + wage, 0);
-const totalHoursWorked = Array.from(dailyHourMap.values()).reduce((sum, hours) => sum + hours, 0);
-
-console.log(`Total Days Worked: ${totalDaysWorked}`);
-console.log(`Total Hours Worked: ${totalHoursWorked}`);
-console.log(`Total Monthly Wage: $${totalWage}`);
-
-const fullWorkingDays = Array.from(dailyHourMap)
-    .filter(([day, hours]) => hours === FULL_TIME_HOURS)
-    .map(([day]) => `Day ${day}`);
-
-const partWorkingDays = Array.from(dailyHourMap)
-    .filter(([day, hours]) => hours === PART_TIME_HOURS)
-    .map(([day]) => `Day ${day}`);
-
-const noWorkingDays = Array.from(dailyHourMap)
-    .filter(([day, hours]) => hours === 0)
-    .map(([day]) => `Day ${day}`);
-
-console.log("Full Working Days:", fullWorkingDays);
-console.log("Part Working Days:", partWorkingDays);
-console.log("No Working Days:", noWorkingDays);
+console.log("Work Log (Day-wise):", workLog);
 
 
 
